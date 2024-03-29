@@ -1,0 +1,135 @@
+.square-card {
+    display: grid;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10%;
+    width: 70%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+    text-decoration: none;
+
+  }
+  
+  .square-card:hover {
+    transform: scale(1.05); /* Increase the size on hover */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add a box shadow on hover */
+  }
+
+.img-fluid{
+    padding-left: 10%;
+    width: 100%;
+    height: 100%;
+}
+
+.card-body{
+  /* background-color: rgba(227, 224, 224, 0.25); 
+  backdrop-filter: blur(5px);   */
+  z-index: 10;
+}
+
+
+  #root{
+    /* background: #ff0049; */
+    background: radial-gradient(circle, rgba(210,211,214,1) 0%, rgba(251,250,247,1) 100%);
+    /* background-color: #000000; */
+  }
+
+  /* #root {
+    position: relative;
+    overflow: hidden; 
+  }
+  
+  #root::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../media/home-img3.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    z-index: -1; 
+  } */
+  
+  /* Adjust the height of #root as needed */
+
+  
+  /* .custom-footer {
+    margin-left: 0px;
+    margin-right: 0;
+  } */
+
+  .icon-hover {
+    padding: 2%;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease; /* Add transition for smooth movement, color change, and border-radius change */
+    border-radius: 50%; /* Make the icons circular */
+    display: inline-flex; /* Ensure icons are displayed in a line */
+    align-items: center; /* Align icon vertically */
+    /* justify-content: center; Align icon horizontally */
+    width: 2rem;
+    height: 2rem;
+    background-color: white; /* Set initial background color */
+  }
+  
+  .icon-hover:hover {
+    background-color: gray; /* Change background color to white on hover */
+    color: white; /* Change icon color to white on hover */
+    transform: translateY(-6px); /* Move icon 3 pixels upwards */
+    font-size: 1.2em; /* Increase font size to 1.2 times the original size */
+  }
+  
+  .icon-hover{
+    cursor: pointer;
+  }
+  
+  /* .jumbotron {
+    background-image: url("blob.svg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    animation: fadeInDown 1s ease forwards 0.1s;
+} */
+
+/* .container.text-center {
+    background-color: rgba(255, 255, 255, 0.25); 
+    backdrop-filter: blur(80px); 
+    border-radius: 10px; 
+    padding: 20px; 
+  } */
+
+  .main_heading {
+    font-family: 'Roboto', sans-serif;
+    /* color: white; */
+  }
+
+  h4{
+    font-weight: bold;
+  }
+  
+  .container{
+    width: 100%;
+  }
+  /* .sub_heading{
+    font-family: Ojuju;
+  } */
+  
+  
+  /* home_features.css */
+/* .blurry-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../media/home-img3.jpg');
+    background-size: cover;
+    filter: blur(10px); 
+    z-index: -1;
+  } */
+  
+
+  

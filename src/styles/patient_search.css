@@ -1,0 +1,55 @@
+.patient_data_card {
+    display: grid;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10%;
+    width: 70%;
+    /* height: 200px; */
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+    background-color: #f8f9fa;
+    color: black;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    /* filter: blur(1px); */
+  }
+  
+
+  .card:hover {
+    transform: scale(1.05); /* Increase the size on hover */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add a box shadow on hover */
+    /* border-radius: 29% 29% 30% 30% / 28% 28% 29% 28%; */
+    }
+
+  .patient_card-title{
+    color: #50a8ea;
+    margin-bottom: 20px;
+  }
+
+  .card-text{
+    margin: 5px;
+  }
+
+  .view_details{
+    margin-top: 10px;
+  }
+
+  .filter-icon {
+    padding: 5px;
+    cursor: pointer;
+    color: gray;
+    background-color: rgb(255, 255, 255);
+    font-size: small;
+    transition: transform 0.1s ease-in-out;
+
+  }
+  
+  .filter-icon:hover {
+    transform: scale(1.05);
+    color: rgb(68, 68, 68); /* Change the color as desired */
+    background-color: rgb(209, 209, 209);
+    border-radius: 10px;
+  }
+
+  
+  
