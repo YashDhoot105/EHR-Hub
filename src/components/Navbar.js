@@ -119,6 +119,8 @@
 import React from "react";
 import { getAuth, signOut } from "firebase/auth";
 import "../styles/navbar.css";
+import EHRHubLogo from "../media/EHR-Hub-Logo.png";
+
 
 const Navbar = (props) => {
   function handleLogOut() {
@@ -136,13 +138,13 @@ const Navbar = (props) => {
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-container">
       <div className="container-fluid">
-        <a className="navbar-brand text-white " href="/">
-          <span
-            className="badge badge bg-secondary p-2"
-            style={{ marginLeft: "3rem" }}
-          >
-            EHRMS
-          </span>
+      <a className="navbar-brand text-white " href="/">
+      <img
+            src={EHRHubLogo}
+            alt="EHR Hub Logo"
+            className="Logo"
+            style={{ maxWidth: "100%", height: "50px",paddingLeft:"24px", paddingRight:"24px" }}
+          />
         </a>
         <button
           className="navbar-toggler bg-white"
