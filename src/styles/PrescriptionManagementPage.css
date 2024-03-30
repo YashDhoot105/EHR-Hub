@@ -54,15 +54,13 @@
   }
 
   /* Add this CSS to your stylesheet */
-input[type="text"],
+/* input[type="text"],
 textarea {
-  border: none; /* Remove default border */
-  border-bottom: 2px solid transparent; /* Add bottom border */
-  outline: none; /* Remove default outline */
-  /* padding: 5px; */
-  transition: border-color 0.3s ease; /* Add transition for border color */
+  border: none; 
+  border-bottom: 2px solid transparent; 
+  outline: none; 
+  transition: border-color 0.3s ease; 
   border-radius: 10px;
-  /* padding: 1%; */
   margin: 0.5%;
   border-color: rgb(165, 165, 165);
   height: 40px;
@@ -70,8 +68,8 @@ textarea {
 
 input[type="text"]:focus,
 textarea:focus {
-  border-color: blue; /* Change border color when focused */
-}
+  border-color: blue; 
+} */
 
 label{
     width:150px
