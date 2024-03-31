@@ -116,18 +116,37 @@
 // export default Navbar;
 
 // import React, { useEffect } from 'react';
-import React from "react";
-import { getAuth, signOut } from "firebase/auth";
+import React, { useState, useEffect } from "react";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+
 import "../styles/navbar.css";
-import EHRHubLogo from "../media/EHR-Hub-Logo.png";
+import EHRHubLogo from "../media/EHR-Hub-Logo-2.png";
 
 
-const Navbar = (props) => {
+const Navbar = () => {
+  const [userName, setUserName] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in.
+        setUserName(user.displayName);
+      } else {
+        // No user is signed in.
+        setUserName(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   function handleLogOut() {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        setUserName(null); // Clear the user name after logout
       })
       .catch((error) => {
         // An error happened.
@@ -143,7 +162,7 @@ const Navbar = (props) => {
             src={EHRHubLogo}
             alt="EHR Hub Logo"
             className="Logo"
-            style={{ maxWidth: "100%", height: "50px",paddingLeft:"24px", paddingRight:"24px" }}
+            style={{ maxWidth: "100%", height: "50px",paddingLeft:"80px", paddingRight:"40px" }}
           />
         </a>
         <button
@@ -160,24 +179,24 @@ const Navbar = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link text-black px-4 py-3" href="/">
+              <a className="nav-link px-4 py-3" href="/">
                 Home
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-black px-4 py-3" href="/newsBoard">
+              <a className="nav-link px-4 py-3" href="/newsBoard">
                 News board
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-black px-4 py-3" href="/record" target='blank'>
+              <a className="nav-link px-4 py-3" href="/record" target='blank'>
                 Record
               </a>
             </li>
 
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle text-black px-4 py-3"
+                className="nav-link dropdown-toggle px-4 py-3"
                 href="/"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -188,7 +207,7 @@ const Navbar = (props) => {
               <ul className="dropdown-menu">
                 <li>
                   <a
-                    className="dropdown-item text-black"
+                    className="dropdown-item"
                     href="#patient_record_management"
                   >
                     <lord-icon
@@ -206,7 +225,7 @@ const Navbar = (props) => {
                 </li>
                 <li>
                   <a
-                    className="dropdown-item text-black"
+                    className="dropdown-item"
                     href="#appointment_scheduling"
                   >
                     <lord-icon
@@ -223,7 +242,7 @@ const Navbar = (props) => {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item text-black" href="/vaccination" target='blank'>
+                  <a className="dropdown-item" href="/vaccination" target='blank'>
                     <script src="https://cdn.lordicon.com/lordicon.js"></script>
                     <lord-icon
                       src="https://cdn.lordicon.com/znjhzlev.json"
@@ -242,7 +261,7 @@ const Navbar = (props) => {
                 </li>
                 <li>
                   <a
-                    className="dropdown-item text-black"
+                    className="dropdown-item"
                     href="#prescription_management"
                   >
                     <lord-icon
@@ -261,22 +280,31 @@ const Navbar = (props) => {
               </ul>
             </li>
           </ul>
-          {props.name ? (
-            <div className="d-flex align-items-center">
-              <h5 className="text-white">Welcome {props.name}</h5>
-              <button
-                type="button"
-                className="btn btn-secondary ms-2"
-                onClick={handleLogOut}
-              >
-                Log out
-              </button>
+          {userName ? (
+            <div className="navbar-nav">
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle welcome_username"
+                  href="/"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Welcome {userName}
+                </a>
+                <ul className="dropdown-menu dropdown-menu-width" aria-labelledby="navbarDropdown">
+                  <li>
+                    <button className="dropdown-item" onClick={handleLogOut}>Logout</button>
+                  </li>
+                </ul>
+              </li>
             </div>
           ) : (
             <ul className="d-flex p-0" style={{ marginRight: "6rem" }}>
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle text-black px-4 py-2"
+                  className="nav-link dropdown-toggle px-4 py-2"
                   href="/"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -299,13 +327,13 @@ const Navbar = (props) => {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item text-black" href="/login">
+                    <a className="dropdown-item" href="/login">
                       Login
                     </a>
                   </li>
                   <li>
                     <a
-                      className="dropdown-item text-black"
+                      className="dropdown-item"
                       href="/registrationForm"
                     >
                       Register

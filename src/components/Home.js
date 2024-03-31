@@ -28,8 +28,55 @@ import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
 
 
+// import styled from 'styled-components';
+
+// const Container = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: flex-start;
+//   padding: 20px;
+//   background-color: #f5f5f5;
+//   border-radius: 8px;
+// `;
+
+// const FormSection = styled.div`
+//   width: 50%;
+// `;
+
+// const CallbackSection = styled.div`
+//   width: 40%;
+//   background-color: #fff;
+//   padding: 20px;
+//   border-radius: 8px;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+// `;
+
+
 const Home = () => {
   const [showPrescriptionManagement, setShowPrescriptionManagement] = useState(false);
+
+
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [phone, setPhone] = useState('');
+  // const [message, setMessage] = useState('');
+  // const [file, setFile] = useState(null);
+
+  // const handleFileChange = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   // Handle form submission here
+  //   console.log('Name:', name);
+  //   console.log('Email:', email);
+  //   console.log('Phone:', phone);
+  //   console.log('Message:', message);
+  //   console.log('File:', file);
+  // };
+
+
 
   useEffect(() => {
     ScrollReveal({
@@ -41,7 +88,7 @@ const Home = () => {
 
     ScrollReveal().reveal(".home-img", { delay: 700, origin: "right" });
     ScrollReveal().reveal(".lead", { delay: 800, origin: "left" });
-    ScrollReveal().reveal(".main_heading", { delay: 600, origin: "left" });
+    ScrollReveal().reveal(".main_heading_remaining_text", { delay: 600, origin: "left" });
     ScrollReveal().reveal(".features_section", { delay: 600, origin: "top" });
     ScrollReveal().reveal(".features_section_cards_right", {
       delay: 600,
@@ -150,9 +197,9 @@ const Home = () => {
       <div className="row align-items-center">
         <header className="jumbotron mt-2 col-md-6 d-flex align-items-center">
           <div className="container text-center glassmorphism">
-            <h1 className="display-4 fw-bolder main_heading">
-              Electronic Health Record Management System
-            </h1>
+          <h1 className="display-4 fw-bolder main_heading">
+      <span className="first-word tracking-in-expand">Electronic</span><span className="main_heading_remaining_text"> Health Record Management System</span>
+    </h1>
             <p className="lead mt-5 sub_heading">
               Welcome to our EHRMS platform. Manage health records efficiently
               and securely.
@@ -167,7 +214,7 @@ const Home = () => {
 
       <div className="row align-items-center justify-content-center features_section">
         <div className="col-md-12 text-center mt-6 mb-2">
-          <h1>Features</h1>
+          <h1 className="Features_heading">Features</h1>
         </div>
       </div>
 
@@ -315,6 +362,73 @@ const Home = () => {
           </div>
         </div>
       </section> */}
+
+
+
+
+{/* <Container>
+      <FormSection>
+        <h2>Send your message ✉️</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">Name*</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email*</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="phone">Phone</label>
+            <input
+              type="tel"
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="optional"
+            />
+          </div>
+          <div>
+            <label htmlFor="message">Message</label>
+            <textarea
+              id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="file">ADD YOUR FILE</label>
+            <input type="file" id="file" onChange={handleFileChange} />
+            {file ? file.name : 'No File Selected'}
+          </div>
+          <button type="submit">SEND</button>
+        </form>
+      </FormSection>
+      <CallbackSection>
+        <h2>Call back request ☎️</h2>
+        <div>
+          <h3>CONTACT US</h3>
+          <p>Paul, Head of International Sales</p>
+          <p>P: +1 (202) 7889535</p>
+          <p>e-mail: pavlo.nevylko@softengi.com</p>
+          <button>BOOK TIME SLOT</button>
+        </div>
+      </CallbackSection>
+    </Container> */}
+
+
 
       <MDBFooter
         bgColor="light"

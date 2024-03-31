@@ -9,7 +9,9 @@
     align-items: center;
     transition: transform 0.3s ease-in-out;
     text-decoration: none;
-
+    position: relative; /* Add this line to make it a positioned element */
+    z-index: 1; /* Add this line to set the z-index lower than the square card */
+  
   }
   
   .square-card:hover {
@@ -32,9 +34,95 @@
 
   #root{
     /* background: #ff0049; */
-    background: radial-gradient(circle, rgba(210,211,214,1) 0%, rgba(251,250,247,1) 100%);
+    /* background: radial-gradient(circle, rgba(210,211,214,1) 0%, rgba(251,250,247,1) 100%); */
     /* background-color: #000000; */
+    background-color: white;
+    /* background: hsla(27, 58%, 93%, 1);
+
+background: linear-gradient(90deg, hsla(27, 58%, 93%, 1) 0%, hsla(0, 6%, 97%, 1) 100%);
+
+background: -moz-linear-gradient(90deg, hsla(27, 58%, 93%, 1) 0%, hsla(0, 6%, 97%, 1) 100%);
+
+background: -webkit-linear-gradient(90deg, hsla(27, 58%, 93%, 1) 0%, hsla(0, 6%, 97%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F7EBE1", endColorstr="#F7F6F6", GradientType=1 ); */
   }
+
+  .Features_heading::before {
+    /* background-color: #3236fd;  */
+    background-image: linear-gradient(to right, #ff8e31, #e52e71); /* Set gradient colors */
+
+    border-radius: 8px; /* Apply border-radius */
+    bottom: -2px; /* Adjust the position relative to the heading */
+    content: ""; /* Add content for the pseudo-element */
+    height: 4px; /* Set the height of the underline */
+    left: 38%; /* Adjust the left position to cut the length from the start */
+    position: absolute; /* Position the pseudo-element */
+    width: 24%; /* Set the width of the underline */
+    
+}
+
+.features_section{
+  margin-bottom: 20px;
+}
+.features_section_cards{
+  background-color: #ffffff;
+  opacity: 0.8;
+  background-image: radial-gradient(#f77a45 2px, #ffffff 2px);
+  background-size: 40px 40px;
+  position: relative; /* Add this line to make it a positioned element */
+  z-index: 0; /* Add this line to set the z-index lower than the square card */
+}
+
+
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tracking-in-expand {
+  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  font-family: 'Josefin Sans', sans-serif;
+  /* color: #3236fd; */
+  white-space: nowrap;
+  /* overflow: hidden; */
+  display: inline-block; /* Add this line */
+  width: 260px; /* Add this line */
+  vertical-align: middle; /* Add this line */
+  color: transparent; /* Make the text transparent */
+
+  /* background: linear-gradient(to right, #3236fd, #5c71f8);  */
+  background: linear-gradient(to right, #ff8a00, #e52e71); 
+  -webkit-background-clip: text; /* Clip the background to the text */
+  background-clip: text; /* Clip the background to the text */
+  -webkit-text-fill-color: transparent; /* Ensure text remains transparent */
+
+}
+
+@media (max-width: 768px) {
+  .tracking-in-expand {
+    width: 200px; /* Width for screens up to 768px */
+  }
+}
+
+@media (max-width: 480px) {
+  .tracking-in-expand {
+    width: 150px; /* Width for screens up to 480px */
+  }
+}
+
+
+
 
   /* #root {
     position: relative;
@@ -103,16 +191,18 @@
 
   .main_heading {
     font-family: 'Space Grotesk', sans-serif;
-    /* color: white; */
+    color: black;
   }
 
   h4{
     font-weight: bold;
   }
   
-  .container{
+  .container {
     width: 100%;
+    overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
   }
+  
   /* .sub_heading{
     font-family: Ojuju;
   } */

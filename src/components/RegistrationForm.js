@@ -2,6 +2,8 @@ import { createUserWithEmailAndPassword,updateProfile } from 'firebase/auth';
 import React, { useState } from 'react';
 import { auth } from './firebase';
 import { useNavigate } from 'react-router-dom';
+import "../styles/registration_form.css";
+
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -75,7 +77,7 @@ const RegistrationForm = () => {
       <div className="row justify-content-center">
         <div className="col-md-5">
           <div className="registration-container p-4 border rounded shadow">
-            <h2 className="text-center mb-4">Registration</h2>
+            <h2 className="text-center mb-4 registration_heading">Registration</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-1">
                 <label htmlFor="name" className="form-label">Name</label>
@@ -127,8 +129,8 @@ const RegistrationForm = () => {
               </div>
               
               <div className="mb-1 d-flex justify-content-around mt-3">
-                <button type="submit" className="btn btn-primary p-2">Register</button>
-                <button type="button" className="btn btn-secondary p-2" onClick={handleClear}>Clear Form</button>
+                <button type="submit" className="register_button p-2">Register</button>
+                <button type="button" className="Clear_button p-2" onClick={handleClear}>Clear Form</button>
               </div>
               <div className="text-center">
                 <b className='text-center text-danger'>{errMsg}</b>

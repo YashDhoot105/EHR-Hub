@@ -52,6 +52,17 @@
   }
 
 
-  
-  
+  .create_patient_button{
+    background-color: #ff8e31;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .create_patient_button:hover{
+    color: #ff8e31;
+    background-color: white;
+  }
+
   

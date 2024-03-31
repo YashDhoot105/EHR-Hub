@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NewsItems from './NewsItmes'; // Assuming you have a component to render each news item
+import '../styles/news_dashboard.css';
+
 
 const NewsBoard = () => {
   const [articles, setArticles] = useState([]);
@@ -16,9 +18,7 @@ const NewsBoard = () => {
 
   return (
     <div className="my-2 mb-5">
-      <h1 className="mt-4 mb-3 text-center mb-5 mt-3">Latest 
-        <span className='badge bg-danger mx-2 mb-5 mt-3'>News</span>
-      </h1>
+      <h1 className="mt-4 mb-3 text-center mb-5 mt-3 Latest_News_Heading slide-in-elliptic-bottom-bck">Latest News</h1>
       <div>
       <div className="news-card-container">
         {articles.map((news, index) => (

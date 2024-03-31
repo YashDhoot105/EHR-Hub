@@ -239,7 +239,7 @@ const PatientSearch = ({ onPatientSelect }) => {
               onChange={handleFileInputChange}
             />
           </div>
-          <button className="btn btn-success" onClick={handleCreatePatient}>
+          <button className="create_patient_button" onClick={handleCreatePatient}>
             Create Patient
           </button>
         </div>
