@@ -1,11 +1,17 @@
 .Login_button{
     color:#ff8e31;
     background-color: white;
+    border: none;
+    border-radius: 10px;
+
 }
 
 .Clear_button{
     color:#ff8e31;
     background-color: white;
+    border: none;
+    border-radius: 10px;
+
 }
 
 .Clear_button:hover{

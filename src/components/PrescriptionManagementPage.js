@@ -366,91 +366,76 @@
 
 
 
-import React, { useState, useEffect } from 'react';
+
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const PrescriptionManagementPage = () => {
-  const [medications, setMedications] = useState([]);
-  const [selectedMedication, setSelectedMedication] = useState(null);
-  const [dosage, setDosage] = useState('');
-  const [instructions, setInstructions] = useState('');
-  const [prescriptions, setPrescriptions] = useState([]);
+  const [policyNumber, setPolicyNumber] = useState('');
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Fetch medications from the Better Doctor API
-    const fetchMedications = async () => {
-      try {
-        const response = await axios.get('https://api.betterdoctor.com/2016-03-01/medications', {
-          params: {
-            user_key: 'YOUR_API_KEY',
-          },
-        });
-        setMedications(response.data.data);
-      } catch (error) {
-        console.error('Error fetching medications:', error);
-      }
-    };
-
-    fetchMedications();
-  }, []);
-
-  const handleMedicationSelect = (medication) => {
-    setSelectedMedication(medication);
+  const handleChange = (e) => {
+    setPolicyNumber(e.target.value);
   };
 
-  const handlePrescribe = () => {
-    const newPrescription = {
-      medication: selectedMedication,
-      dosage,
-      instructions,
-    };
-    setPrescriptions([...prescriptions, newPrescription]);
-    setSelectedMedication(null);
-    setDosage('');
-    setInstructions('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const apiKey = 'd687412e7b53146b2631dc01974ad0a4'; // Test API key
+      const year = 2019; // Example year
+
+      // Fetch plan details based on policy number
+      const planResponse = await axios.get(
+        `https://marketplace.api.healthcare.gov/api/v1/plans/${policyNumber}?year=${year}&apikey=${apiKey}`
+      );
+
+      setPlans([planResponse.data]);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
-      <h2>Prescription Management</h2>
-      <div>
-        <h3>Select Medication</h3>
-        <ul>
-          {medications.map((medication) => (
-            <li key={medication.id} onClick={() => handleMedicationSelect(medication)}>
-              {medication.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-      {selectedMedication && (
+      <h2>Find Health Insurance Plan</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Policy Number:
+          <input
+            type="text"
+            name="policyNumber"
+            value={policyNumber}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Loading...' : 'Search Plan'}
+        </button>
+      </form>
+      {error && <div>Error: {error}</div>}
+      {plans.length > 0 && (
         <div>
-          <h3>Prescribe {selectedMedication.name}</h3>
-          <label>
-            Dosage:
-            <input type="text" value={dosage} onChange={(e) => setDosage(e.target.value)} />
-          </label>
-          <label>
-            Instructions:
-            <textarea value={instructions} onChange={(e) => setInstructions(e.target.value)} />
-          </label>
-          <button onClick={handlePrescribe}>Prescribe</button>
+          <h3>Plan Details</h3>
+          {plans.map((plan) => (
+            <div key={plan.id}>
+              <h4>{plan.name}</h4>
+              <p>Plan Type: {plan.type}</p>
+              <p>Monthly Premium: {plan.monthlyPremium}</p>
+              {/* Display other relevant plan details */}
+            </div>
+          ))}
         </div>
       )}
-      <div>
-        <h3>Prescribed Medications</h3>
-        <ul>
-          {prescriptions.map((prescription, index) => (
-            <li key={index}>
-              <h4>{prescription.medication.name}</h4>
-              <p>Dosage: {prescription.dosage}</p>
-              <p>Instructions: {prescription.instructions}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
+
 
 export default PrescriptionManagementPage;

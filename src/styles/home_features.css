@@ -11,12 +11,16 @@
     text-decoration: none;
     position: relative; /* Add this line to make it a positioned element */
     z-index: 1; /* Add this line to set the z-index lower than the square card */
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    border: none;
+
   
   }
   
   .square-card:hover {
-    transform: scale(1.05); /* Increase the size on hover */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add a box shadow on hover */
+    /* transform: scale(1.05);  */
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);  */
+    box-shadow: rgba(237, 162, 77, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
   }
 
 .img-fluid{
@@ -64,6 +68,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F7EBE1", en
 
 .features_section{
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 .features_section_cards{
   background-color: #ffffff;
@@ -122,6 +127,9 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F7EBE1", en
 }
 
 
+.home_page_first_section{
+  background: conic-gradient(from 330deg at 50% 53%, #f9f1e6, #fdf3ed, #fff8f7)
+}
 
 
   /* #root {
@@ -220,4 +228,5 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F7EBE1", en
     filter: blur(10px); 
     z-index: -1;
   } */
+  
   

@@ -122,7 +122,6 @@ import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "../styles/navbar.css";
 import EHRHubLogo from "../media/EHR-Hub-Logo-2.png";
 
-
 const Navbar = () => {
   const [userName, setUserName] = useState(null);
 
@@ -157,12 +156,17 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-container">
       <div className="container-fluid">
-      <a className="navbar-brand text-white " href="/">
-      <img
+        <a className="navbar-brand text-white " href="/">
+          <img
             src={EHRHubLogo}
             alt="EHR Hub Logo"
             className="Logo"
-            style={{ maxWidth: "100%", height: "50px",paddingLeft:"80px", paddingRight:"40px" }}
+            style={{
+              maxWidth: "100%",
+              height: "50px",
+              paddingLeft: "80px",
+              paddingRight: "40px",
+            }}
           />
         </a>
         <button
@@ -189,10 +193,16 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link px-4 py-3" href="/record" target='blank'>
+              <a className="nav-link px-4 py-3" href="/record" target="blank">
                 Record
               </a>
             </li>
+{/* 
+            <li className="nav-item">
+              <a className="nav-link px-4 py-3" href="/HealthInsurancePlans">
+                Insurance
+              </a>
+            </li> */}
 
             <li className="nav-item dropdown">
               <a
@@ -224,10 +234,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
-                    href="#appointment_scheduling"
-                  >
+                  <a className="dropdown-item" href="#appointment_scheduling">
                     <lord-icon
                       src="https://cdn.lordicon.com/ogkflacg.json"
                       trigger="hover"
@@ -242,7 +249,11 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="/vaccination" target='blank'>
+                  <a
+                    className="dropdown-item"
+                    href="/vaccination"
+                    target="blank"
+                  >
                     <script src="https://cdn.lordicon.com/lordicon.js"></script>
                     <lord-icon
                       src="https://cdn.lordicon.com/znjhzlev.json"
@@ -260,10 +271,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
-                    href="#prescription_management"
-                  >
+                  <a className="dropdown-item" href="#prescription_management">
                     <lord-icon
                       src="https://cdn.lordicon.com/depeqmsz.json"
                       trigger="hover"
@@ -293,9 +301,14 @@ const Navbar = () => {
                 >
                   Welcome {userName}
                 </a>
-                <ul className="dropdown-menu dropdown-menu-width" aria-labelledby="navbarDropdown">
+                <ul
+                  className="dropdown-menu dropdown-menu-width"
+                  aria-labelledby="navbarDropdown"
+                >
                   <li>
-                    <button className="dropdown-item" onClick={handleLogOut}>Logout</button>
+                    <button className="dropdown-item" onClick={handleLogOut}>
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </li>
@@ -332,10 +345,7 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a
-                      className="dropdown-item"
-                      href="/registrationForm"
-                    >
+                    <a className="dropdown-item" href="/registrationForm">
                       Register
                     </a>
                   </li>

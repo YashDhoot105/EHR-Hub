@@ -194,7 +194,7 @@ const Home = () => {
 
   return (
     <div className="container ml-0">
-      <div className="row align-items-center">
+      <div className="row align-items-center home_page_first_section">
         <header className="jumbotron mt-2 col-md-6 d-flex align-items-center">
           <div className="container text-center glassmorphism">
           <h1 className="display-4 fw-bolder main_heading">
@@ -207,7 +207,7 @@ const Home = () => {
           </div>
         </header>
 
-        <div className="home-img col-md-6 py-5 img-container">
+        <div className="home-img col-md-6 py-5 img-container z-1">
           <img src={homeImg} alt="heart-img" className="img-fluid rounded-5" />
         </div>
       </div>
@@ -228,7 +228,7 @@ const Home = () => {
                 scale: 1.05,
               },
             }}
-            className="card card-margin square-card shadow text-center mb-4 overflow-hidden"
+            className="card card-margin square-card text-center mb-4 overflow-hidden"
           >
             <Background />
             <div className="card-body ">
@@ -255,7 +255,7 @@ const Home = () => {
                 scale: 1.05,
               },
             }}
-            className="card card-margin square-card shadow text-center mb-4 overflow-hidden"
+            className="card card-margin square-card text-center mb-4 overflow-hidden"
           >
             <Background />
             <div className="card-body">
@@ -282,7 +282,7 @@ const Home = () => {
                 scale: 1.05,
               },
             }}
-            className="card card-margin square-card shadow text-center mb-4 overflow-hidden"
+            className="card card-margin square-card text-center mb-4 overflow-hidden"
           >
             <Background />
             <div className="card-body">
@@ -315,7 +315,7 @@ const Home = () => {
                 scale: 1.05,
               },
             }}
-            className="card card-margin square-card shadow text-center mb-4 overflow-hidden"
+            className="card card-margin square-card text-center mb-4 overflow-hidden"
             // onClick={handlePrescriptionManagementClick} 
 
           >
@@ -482,7 +482,7 @@ const Home = () => {
                 </p>
               </MDBCol>
 
-              <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
+              <MDBCol md="4" lg="3" xl="4" className="mx-auto mb-md-0 mb-4">
                 <section className="bg-gray-100 dark:bg-gray-800">
                   <div
                     className="container grid items-center justify-center gap-4 px-4 text-center md:px-6"
