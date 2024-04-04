@@ -37,4 +37,14 @@
 }
 
 .form-contro:hover{
-border-color: #ff8a00;}
+border-color: #ff8a00;
+}
+
+.clicked {
+    border-color: orange;
+  }
+  
+  .clicked input::placeholder {
+    color: orange;
+  }
+  
