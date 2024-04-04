@@ -44,6 +44,9 @@
     /* color: #3236fd; */
     color: #ff8e31;
 }
+  .nav-link {
+cursor: pointer;
+}
 
   .nav-item .nav-link:hover::before,
   .nav-item .nav-link:hover::after {
@@ -139,4 +142,19 @@ ul {
 
 .navbar-collapse li a:hover:before{
     width: 100%;
+} */
+
+
+/* input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid rgb(249, 210, 147);
+  border-radius: 0;
+}
+
+label{
+  margin-bottom: 0;
 } */

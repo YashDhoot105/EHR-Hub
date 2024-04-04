@@ -1,27 +1,49 @@
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAuth } from 'firebase/auth';
+// import { getFirestore } from 'firebase/firestore';
+
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAQCpsWGS3vYEGvYevSIrGfMn5v40PtdWs",
+//   authDomain: "ehr-hub.firebaseapp.com",
+//   projectId: "ehr-hub",
+//   storageBucket: "ehr-hub.appspot.com",
+//   messagingSenderId: "6835888144",
+//   appId: "1:6835888144:web:6e6f9945df925a4538ea95",
+//   measurementId: "G-6X52CB8N8W"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth();
+// const db = getFirestore(app);
+
+// export { app, auth, db };
+
+
+
+
+//...................................................
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBVe8j5-r4O66BD_zLv5-Z86zV4-MTcUDI",
-  authDomain: "ehrms-app.firebaseapp.com",
-  projectId: "ehrms-app",
-  storageBucket: "ehrms-app.appspot.com",
-  messagingSenderId: "342489324268",
-  appId: "1:342489324268:web:a4376ca64816e56f08e3c9",
-  measurementId: "G-6JRLJVL6K3"
+  apiKey: "AIzaSyAQCpsWGS3vYEGvYevSIrGfMn5v40PtdWs",
+  authDomain: "ehr-hub.firebaseapp.com",
+  projectId: "ehr-hub",
+  storageBucket: "ehr-hub.appspot.com",
+  messagingSenderId: "6835888144",
+  appId: "1:6835888144:web:6e6f9945df925a4538ea95",
+  measurementId: "G-6X52CB8N8W"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth();
 
-const db = getFirestore(app); // Initialize Firestore
-
-export {app,auth,db};
+export { app, auth };

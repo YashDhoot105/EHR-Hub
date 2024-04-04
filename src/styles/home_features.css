@@ -229,4 +229,31 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F7EBE1", en
     z-index: -1;
   } */
   
+
+  .view_appointments_button{
+    background-color:#ff8e31;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
   
+  .view_appointments_button:hover{
+  color:#ff8e31;
+  background-color: white;
+  font-weight: bold;
+}
+
+  .book_appointments_button{
+    background-color:#ff8e31;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .book_appointments_button:hover{
+  color:#ff8e31;
+  background-image: linear-gradient(to right, #faece1, #f7eaef);
+   font-weight: bold;
+}

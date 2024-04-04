@@ -118,40 +118,62 @@
 // import React, { useEffect } from 'react';
 import React, { useState, useEffect } from "react";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 import "../styles/navbar.css";
 import EHRHubLogo from "../media/EHR-Hub-Logo-2.png";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in.
         setUserName(user.displayName);
+        const db = getFirestore();
+        const userRef = doc(db, "users", user.uid);
+        getDoc(userRef).then((doc) => {
+          if (doc.exists()) {
+            const role = doc.data().role;
+            setUserRole(role);
+          } else {
+            console.log("User role not found");
+          }
+        });
       } else {
-        // No user is signed in.
         setUserName(null);
+        setUserRole(null);
       }
     });
 
     return () => unsubscribe();
   }, []);
 
-  function handleLogOut() {
+  const handleLogOut = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        setUserName(null); // Clear the user name after logout
+        setUserName(null);
+        setUserRole(null);
       })
       .catch((error) => {
-        // An error happened.
         console.log(error);
       });
-  }
+  };
+
+  const handleHomeClick = () => {
+    if (userRole === "doctor") {
+      navigate("/DoctorHomePage");
+    } else if (userRole === "patient") {
+      navigate("/PatientHomePage");
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-container">
@@ -183,7 +205,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link px-4 py-3" href="/">
+              <a className="nav-link px-4 py-3" onClick={handleHomeClick}>
                 Home
               </a>
             </li>
