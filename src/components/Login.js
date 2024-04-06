@@ -266,21 +266,67 @@ import { auth } from './firebase';
 import { useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import "../styles/login.css";
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
+
+const customTheme = (outerTheme) =>
+  createTheme({
+    palette: {
+      mode: outerTheme.palette.mode,
+    },
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            '--TextField-brandBorderColor': '#E0E3E7',
+            '--TextField-brandBorderHoverColor': '#B2BAC2',
+            '--TextField-brandBorderFocusedColor': '#ff8a00',
+            '& label.Mui-focused': {
+              color: 'var(--TextField-brandBorderFocusedColor)',
+            },
+            '& .MuiInputBase-input': {
+              fontFamily: "'Space Grotesk', sans-serif",
+            },
+            '& .MuiInputBase-input::placeholder': {
+              fontFamily: "'Space Grotesk', sans-serif",
+            },
+          },
+        },
+      },
+      MuiInput: {
+        styleOverrides: {
+          root: {
+            '&::before': {
+              borderBottom: '2px solid var(--TextField-brandBorderColor)',
+            },
+            '&:hover:not(.Mui-disabled, .Mui-error):before': {
+              borderBottom: '2px solid var(--TextField-brandBorderHoverColor)',
+            },
+            '&.Mui-focused:after': {
+              borderBottom: '2px solid var(--TextField-brandBorderFocusedColor)',
+            },
+            '& .MuiInputBase-input': {
+              fontFamily: "'Space Grotesk', sans-serif",
+            },
+            '& .MuiInputBase-input::placeholder': {
+              fontFamily: "'josephine sans', sans-serif",
+            },
+          },
+        },
+      },
+    },
+  });
 
 const Login = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const [formData, setFormData] = useState({ email: '', password: '', });
   const [errMsg, setErrMsg] = useState('');
+  const outerTheme = useTheme();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -334,39 +380,51 @@ const Login = () => {
           <div className="registration-container p-4">
             <h2 className="text-center mb-4 login_heading">Login</h2>
             <form onSubmit={handleSubmit}>
-              <div className="mb-1">
-                <label htmlFor="email" className="form-label">Email Address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-1">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              
+              <ThemeProvider theme={customTheme(outerTheme)}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <TextField
+                    label="Email Address"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    // required
+                    variant="standard"
+                    margin="dense"
+                    InputLabelProps={{
+                      style: { fontFamily: 'Space Grotesk' } // Change font of placeholder
+                    }}
+                  />
+                  <TextField
+                    label="Password"
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    // required
+                    variant="standard"
+                    margin="dense"
+                    InputLabelProps={{
+                      style: { fontFamily: 'Space Grotesk' } // Change font of placeholder
+                    }}
+                  />
+                </Box>
+              </ThemeProvider>
               <div className="mb-1 d-flex justify-content-around mt-3">
-                <button type="submit" className="Login_button p-2">Login</button>
-                <button type="button" className="Clear_button p-2" onClick={handleClear}>Clear</button>
+                <button type="submit" className="Login_button p-2">
+                  Login
+                </button>
+                <button type="button" className="Clear_button p-2" onClick={handleClear}>
+                  Clear
+                </button>
               </div>
               <div className="text-center">
                 <b className='text-center text-danger'>{errMsg}</b>
-              <p>Don't have an account? <a href="/registrationForm" className='Register_link'>Register</a></p>
-            </div>
+                <p>
+                  Don't have an account? <a href="/registrationForm" className='Register_link'>Register</a>
+                </p>
+              </div>
             </form>
           </div>
         </div>

@@ -367,75 +367,102 @@
 
 
 
-import React, { useState } from 'react';
-import axios from 'axios';
+// import React, { useState } from 'react';
 
-const PrescriptionManagementPage = () => {
-  const [policyNumber, setPolicyNumber] = useState('');
-  const [plans, setPlans] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+// const PrescriptionManagementPage = () => {
+//   const [plans, setPlans] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState('');
 
-  const handleChange = (e) => {
-    setPolicyNumber(e.target.value);
-  };
+//   const fetchPlans = async () => {
+//     setLoading(true);
+//     setError('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+//     const data = JSON.stringify({
+//       filter: {
+//         disease_mgmt_programs: [],
+//         division: "HealthCare",
+//         issuer: "",
+//         issuers: [],
+//         metal_levels: [],
+//         metal_level: "Catastrophic",
+//         metal_design_types: [],
+//         design_types: [],
+//         premium: 0,
+//         type: "Indemnity",
+//         types: [],
+//         deductible: 0,
+//         hsa: false,
+//         oopc: 0,
+//         child_dental_coverage: false,
+//         adult_dental_coverage: false,
+//         drugs: [],
+//         providers: [],
+//         quality_rating: 0,
+//         simple_choice: false,
+//         premium_range: { min: 0, max: 0 },
+//         deductible_range: { min: 0, max: 0 }
+//       },
+//       household: {
+//         income: 0,
+//         unemployment_received: "Adult",
+//         people: [],
+//         has_married_couple: false,
+//         effective_date: ""
+//       },
+//       offset: 0,
+//       order: "asc",
+//       place: {
+//         countyfips: "",
+//         state: "",
+//         zipcode: ""
+//       },
+//       sort: "premium",
+//       year: 0,
+//       market: "Individual",
+//       aptc_override: 0,
+//       csr_override: "CSR73",
+//       catastrophic_override: false,
+//       suppressed_plan_ids: []
+//     });
 
-    try {
-      const apiKey = 'd687412e7b53146b2631dc01974ad0a4'; // Test API key
-      const year = 2019; // Example year
+//     try {
+//       const xhr = new XMLHttpRequest();
+//       xhr.withCredentials = true;
+//       xhr.addEventListener("readystatechange", function () {
+//         if (this.readyState === this.DONE) {
+//           const response = JSON.parse(this.responseText);
+//           setPlans(response.plans);
+//           setLoading(false);
+//         }
+//       });
+//       xhr.open("POST", "https://marketplace.api.healthcare.gov/api/v1/plans/search?apikey=nBKTxEY569YAfZxEU1mvsAn1Lo0X9eF4&year=2023");
 
-      // Fetch plan details based on policy number
-      const planResponse = await axios.get(
-        `https://marketplace.api.healthcare.gov/api/v1/plans/${policyNumber}?year=${year}&apikey=${apiKey}`
-      );
+//       xhr.setRequestHeader("content-type", "application/json");
+//       xhr.setRequestHeader("apikey", "nBKTxEY569YAfZxEU1mvsAn1Lo0X9eF4");
+//       xhr.send(data);
+//     } catch (err) {
+//       setError('Error fetching plans');
+//       setLoading(false);
+//     }
+//   };
 
-      setPlans([planResponse.data]);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+//   return (
+//     <div>
+//       <h1>Health Insurance Management</h1>
+//       <button onClick={fetchPlans} disabled={loading}>
+//         {loading ? 'Loading...' : 'Fetch Plans'}
+//       </button>
+//       {error && <p>{error}</p>}
+//       {plans.length > 0 && (
+//         <ul>
+//           {plans.map((plan) => (
+//             <li key={plan.id}>{plan.name}</li>
+//           ))}
+//         </ul>
+//       )}
+//     </div>
+//   );
+// };
 
-  return (
-    <div>
-      <h2>Find Health Insurance Plan</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Policy Number:
-          <input
-            type="text"
-            name="policyNumber"
-            value={policyNumber}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Loading...' : 'Search Plan'}
-        </button>
-      </form>
-      {error && <div>Error: {error}</div>}
-      {plans.length > 0 && (
-        <div>
-          <h3>Plan Details</h3>
-          {plans.map((plan) => (
-            <div key={plan.id}>
-              <h4>{plan.name}</h4>
-              <p>Plan Type: {plan.type}</p>
-              <p>Monthly Premium: {plan.monthlyPremium}</p>
-              {/* Display other relevant plan details */}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-
-export default PrescriptionManagementPage;
+// export default PrescriptionManagementPage;
