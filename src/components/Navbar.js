@@ -159,6 +159,8 @@ const Navbar = () => {
       .then(() => {
         setUserName(null);
         setUserRole(null);
+        navigate('/'); // Redirect user to the home page upon logout
+
       })
       .catch((error) => {
         console.log(error);

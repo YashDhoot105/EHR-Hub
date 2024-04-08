@@ -81,6 +81,9 @@ import PrescriptionManagementPage from './components/PrescriptionManagementPage'
 import DoctorHomePage from './components/DoctorHomePage';
 import PatientHomePage from './components/PatientHomePage';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import BookAppointment from './components/BookAppointment'; // Import BookAppointment component
+import ViewAppointment from './components/ViewAppointment'; // Import ViewAppointment component
+
 
 function App() {
   const [userName, setUserName] = useState('');
@@ -124,6 +127,9 @@ function App() {
         <Route path="/vaccination" element={<Vaccination />} />
         <Route path="/record" element={<PatientSearch />} />
         <Route path="/prescription" element={<PrescriptionManagementPage />} />
+        <Route path="/book-appointment" element={<BookAppointment />} />
+        <Route path="/view-appointment" element={<ViewAppointment />} />
+
       </Routes>
     </BrowserRouter>
   );

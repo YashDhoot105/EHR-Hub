@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { gsap } from 'gsap';
 import ScrollReveal from "scrollreveal";
 import homeImg from "../media/home-img3.jpg";
+import about_us_image from "../media/about-us-image.jpg";
 import "../styles/home_features.css";
 import {
   MDBFooter,
@@ -25,8 +26,9 @@ import "../styles/footer.css"; // Import your custom CSS for hover effects
 // import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion";
 // import PrescriptionManagement from './PrescriptionManagementPage';
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap"; // Assuming you're using Bootstrap for styling
+import { useNavigate } from "react-router-dom";
 
 // import styled from 'styled-components';
 
@@ -51,10 +53,10 @@ import { Link } from 'react-router-dom';
 //   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 // `;
 
-
 const PatientHomePage = () => {
-  const [showPrescriptionManagement, setShowPrescriptionManagement] = useState(false);
-
+  const [showPrescriptionManagement, setShowPrescriptionManagement] =
+    useState(false);
+  const navigate = useNavigate();
 
   // const [name, setName] = useState('');
   // const [email, setEmail] = useState('');
@@ -76,8 +78,6 @@ const PatientHomePage = () => {
   //   console.log('File:', file);
   // };
 
-
-
   useEffect(() => {
     ScrollReveal({
       reset: true,
@@ -88,13 +88,45 @@ const PatientHomePage = () => {
 
     ScrollReveal().reveal(".home-img", { delay: 700, origin: "right" });
     ScrollReveal().reveal(".lead", { delay: 800, origin: "left" });
-    ScrollReveal().reveal(".main_heading_remaining_text", { delay: 600, origin: "left" });
+    ScrollReveal().reveal(".main_heading_remaining_text", {
+      delay: 600,
+      origin: "left",
+    });
     ScrollReveal().reveal(".features_section", { delay: 600, origin: "top" });
     ScrollReveal().reveal(".features_section_cards_right", {
       delay: 600,
       origin: "left",
     });
     ScrollReveal().reveal(".features_section_cards_left", {
+      delay: 600,
+      origin: "right",
+    });
+    ScrollReveal().reveal(".about_us_section", { delay: 600, origin: "top" });
+    ScrollReveal().reveal(".about_us_image", {
+      delay: 600,
+      origin: "left",
+    });
+    ScrollReveal().reveal(".about_us_start_paragraph", {
+      delay: 500,
+      origin: "right",
+    });
+    ScrollReveal().reveal(".about_us_1", {
+      delay: 500,
+      origin: "right",
+    });
+    ScrollReveal().reveal(".about_us_2", {
+      delay: 600,
+      origin: "right",
+    });
+    ScrollReveal().reveal(".about_us_3", {
+      delay: 700,
+      origin: "right",
+    });
+    ScrollReveal().reveal(".about_us_4", {
+      delay: 800,
+      origin: "right",
+    });
+    ScrollReveal().reveal(".about_us_last_paragraph", {
       delay: 600,
       origin: "right",
     });
@@ -124,6 +156,9 @@ const PatientHomePage = () => {
     });
   }, []);
 
+  const handleBookAppointmentClick = () => {
+    navigate("/book-appointment");
+  };
 
   const handlePrescriptionManagementClick = () => {
     setShowPrescriptionManagement(!showPrescriptionManagement);
@@ -197,19 +232,41 @@ const PatientHomePage = () => {
       <div className="row align-items-center home_page_first_section">
         <header className="jumbotron mt-2 col-md-6 d-flex align-items-center">
           <div className="container text-center glassmorphism">
-          <h1 className="display-4 fw-bolder main_heading">
-      <span className="first-word tracking-in-expand">Electronic</span><span className="main_heading_remaining_text"> Health Record Management System</span>
-    </h1>
+            <h1 className="display-4 fw-bolder main_heading">
+              <span className="first-word tracking-in-expand">Electronic</span>
+              <span className="main_heading_remaining_text">
+                {" "}
+                Health Record Management System
+              </span>
+            </h1>
             <p className="lead mt-5 sub_heading">
               Welcome to our EHRMS platform. Manage health records efficiently
               and securely.
             </p>
 
-            <button type="submit" class="book_appointments_button p-2"><i class="fas fa-calendar-alt" style={{paddingRight: "5px",paddingLeft: "5px"}}></i> Book Appointments <i class="fas fa-arrow-right" style={{paddingRight: "5px",paddingLeft: "5px"}} ></i></button>
-
+            <Link to="/book-appointment" style={{ textDecoration: "none" }}>
+              <button
+                type="button"
+                className="book_appointments_button p-2"
+                onClick={handleBookAppointmentClick}
+              >
+                <i
+                  className="fas fa-calendar-alt"
+                  style={{ paddingRight: "5px", paddingLeft: "5px" }}
+                ></i>
+                Book Appointments
+                <i
+                  className="fas fa-arrow-right"
+                  style={{ paddingRight: "5px", paddingLeft: "5px" }}
+                ></i>
+              </button>
+            </Link>
           </div>
-
         </header>
+
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {showBookAppointment && <BookAppointment />}
+        </LocalizationProvider> */}
 
         <div className="home-img col-md-6 py-5 img-container z-1">
           <img src={homeImg} alt="heart-img" className="img-fluid rounded-5" />
@@ -251,7 +308,7 @@ const PatientHomePage = () => {
         </div>
 
         <div className="col-md-6 features_section_cards_left">
-        <motion.div
+          <motion.div
             whileHover="hover"
             transition={{ duration: 1, ease: "backInOut" }}
             variants={{
@@ -274,11 +331,11 @@ const PatientHomePage = () => {
               </h5>
               <p className="card-text">Schedule appointments seamlessly.</p>
             </div>
-            </motion.div>
+          </motion.div>
         </div>
 
         <div className="col-md-6 features_section_cards_right">
-        <motion.div
+          <motion.div
             whileHover="hover"
             transition={{ duration: 1, ease: "backInOut" }}
             variants={{
@@ -305,44 +362,154 @@ const PatientHomePage = () => {
                 Stay updated on the ongoing vaccination camps.
               </p>
             </div>
-            </motion.div>
+          </motion.div>
         </div>
 
         <div className="col-md-6 features_section_cards_left">
-        <Link to="/prescription" style={{ textDecoration: 'none' }}>
-
-        <motion.div
-            whileHover="hover"
-            transition={{ duration: 1, ease: "backInOut" }}
-            variants={{
-              hover: {
-                scale: 1.05,
-              },
-            }}
-            className="card card-margin square-card text-center mb-4 overflow-hidden"
-            // onClick={handlePrescriptionManagementClick} 
-
-          >
-            <Background />
-            <div className="card-body">
-              <script src="https://cdn.lordicon.com/lordicon.js"></script>
-              <lord-icon
-                src="https://cdn.lordicon.com/depeqmsz.json"
-                trigger="hover"
-                style={{ width: "50px", height: "50px" }}
-              ></lord-icon>
-              <h5 className="card-title" id="prescription_management">
-                Prescription Management
-              </h5>
-              <p className="card-text">Efficiently manage prescriptions.</p>
-            </div>
+          <Link to="/prescription" style={{ textDecoration: "none" }}>
+            <motion.div
+              whileHover="hover"
+              transition={{ duration: 1, ease: "backInOut" }}
+              variants={{
+                hover: {
+                  scale: 1.05,
+                },
+              }}
+              className="card card-margin square-card text-center mb-4 overflow-hidden"
+              // onClick={handlePrescriptionManagementClick}
+            >
+              <Background />
+              <div className="card-body">
+                <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                <lord-icon
+                  src="https://cdn.lordicon.com/depeqmsz.json"
+                  trigger="hover"
+                  style={{ width: "50px", height: "50px" }}
+                ></lord-icon>
+                <h5 className="card-title" id="prescription_management">
+                  Prescription Management
+                </h5>
+                <p className="card-text">Efficiently manage prescriptions.</p>
+              </div>
             </motion.div>
-            </Link>
-          </div>
+          </Link>
+        </div>
       </div>
 
-      {/* {showPrescriptionManagement && <PrescriptionManagement />} */}
+      <div className="row align-items-center justify-content-center about_us_section">
+        <div className="col-md-12 text-center mt-6 mb-2">
+          <h1 className="About_Us_heading">About us</h1>
+        </div>
+      </div>
 
+      <section id="about-us" className="py-5 about_us_container">
+        <Container>
+          <Row className="align-items-center">
+            <Col md={6} className="order-md-1">
+              <img
+                src={about_us_image}
+                alt="About Us"
+                className="img-fluid rounded-circle mb-4 mb-md-0 about_us_image"
+              />
+            </Col>
+
+            <Col md={6} className="order-md-2 about_us_text">
+              {/* <h2 className="text-center text-md-start mb-4">
+                About Us
+              </h2> */}
+              <p className="text-center text-md-start pb-4 mt-4 about_us_start_paragraph">
+                Our Health Record Management System is a comprehensive platform
+                designed to streamline healthcare processes and improve patient
+                care. With a focus on security, efficiency, and accessibility,
+                our system offers features such as:
+              </p>
+              <ul className="list-unstyled text-md-start">
+                <li className="about_us_1">
+                  {" "}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/oqdmuxru.json"
+                    trigger="hover"
+                    colors="primary:#ff8e31"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      paddingTop: "15px",
+                    }}
+                    display="block"
+                  ></lord-icon>
+                  Secure storage and management of patient records
+                </li>
+                <li className="about_us_2">
+                  {" "}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/oqdmuxru.json"
+                    trigger="hover"
+                    colors="primary:#ff8e31"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      paddingTop: "15px",
+                    }}
+                    display="block"
+                  ></lord-icon>
+                  Seamless appointment scheduling and management
+                </li>
+                {/* <li>
+                  {" "}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/oqdmuxru.json"
+                    trigger="hover"
+                    colors="primary:#ff8e31"
+                    style={{ width: "40px", height: "40px", paddingTop:"15px" }}
+                    display="block"
+                  ></lord-icon>
+                  Automated notifications and reminders for appointments and
+                  medication
+                </li> */}
+                <li className="about_us_3">
+                  {" "}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/oqdmuxru.json"
+                    trigger="hover"
+                    colors="primary:#ff8e31"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      paddingTop: "15px",
+                    }}
+                    display="block"
+                  ></lord-icon>
+                  Integration with telemedicine services for remote
+                  consultations
+                </li>
+                <li className="about_us_4">
+                  {" "}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/oqdmuxru.json"
+                    trigger="hover"
+                    colors="primary:#ff8e31"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      paddingTop: "15px",
+                    }}
+                    display="block"
+                  ></lord-icon>
+                  Advanced data encryption and access controls to ensure patient
+                  privacy
+                </li>
+              </ul>
+              <p className="text-center text-md-start pt-4 about_us_last_paragraph">
+                Our mission is to empower healthcare providers with the tools
+                they need to deliver high-quality care while maintaining the
+                highest standards of security and confidentiality.
+              </p>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      {/* {showPrescriptionManagement && <PrescriptionManagement />} */}
 
       {/* <section className="py-5 bg-gray-100 dark:bg-gray-800">
         <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
@@ -367,10 +534,7 @@ const PatientHomePage = () => {
         </div>
       </section> */}
 
-
-
-
-{/* <Container>
+      {/* <Container>
       <FormSection>
         <h2>Send your message ✉️</h2>
         <form onSubmit={handleSubmit}>
@@ -431,8 +595,6 @@ const PatientHomePage = () => {
         </div>
       </CallbackSection>
     </Container> */}
-
-
 
       <MDBFooter
         bgColor="light"

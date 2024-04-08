@@ -1,44 +1,49 @@
-import React from 'react';
-import NewsItems from './NewsItems';
-import { motion } from 'framer-motion';
+// import React, { useRef } from 'react';
+// import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
+// import { wrap } from "framer-motion";
 
-const HomePageNewsSection = () => {
-  const newsData = [
-    // Replace with your actual news data
-    { title: 'News Article 1', description: 'Lorem ipsum dolor sit amet...', src: null, url: '#' },
-    { title: 'News Article 2', description: 'Consectetur adipiscing elit...', src: null, url: '#' },
-    // Add more news items as needed
-  ];
+// function HomePageNewsSection({ children, baseVelocity = 100 }) {
+//   const baseX = useMotionValue(0);
+//   const x = useTransform(baseX, (v) => `${v}%`);
 
-  return (
-    <div className="home-page-news-section">
-      <h2>Latest News</h2>
-      <div className="news-row">
-        {newsData.slice(0, 2).map((news, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-          >
-            <NewsItems {...news} />
-          </motion.div>
-        ))}
-      </div>
-      <div className="news-row">
-        {newsData.slice(2, 4).map((news, index) => (
-          <motion.div
-            key={index + 2}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: (index + 2) * 0.2 }}
-          >
-            <NewsItems {...news} />
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-};
+//   const directionFactor = useRef(1);
+//   const moveCards = () => {
+//     const moveBy = directionFactor.current * baseVelocity;
+//     baseX.set(baseX.get() + moveBy);
+//   };
 
-export default HomePageNewsSection;
+//   // Change direction when cards reach edge
+//   const handleDragEnd = (event, info) => {
+//     if (info.offset.x < 0 && baseX.get() <= -100) {
+//       directionFactor.current = 1;
+//     } else if (info.offset.x > 0 && baseX.get() >= 100) {
+//       directionFactor.current = -1;
+//     }
+//   };
+
+//   return (
+//     <motion.div
+//       className="parallax"
+//       style={{ x }}
+//       drag="x"
+//       dragConstraints={{ left: 0, right: 0 }}
+//       onDragEnd={handleDragEnd}
+//       onMouseMove={moveCards}
+//     >
+//       <motion.div className="scroller" style={{ display: 'flex', flexDirection: 'row', gap: '20px', width: '100%', overflowX: 'scroll' }}>
+//         {React.Children.map(children, (child, index) => (
+//           <motion.div
+//             key={index}
+//             whileHover={{ scale: 1.05 }}
+//             transition={{ duration: 0.3 }}
+//             style={{ flex: '0 0 auto' }}
+//           >
+//             {child}
+//           </motion.div>
+//         ))}
+//       </motion.div>
+//     </motion.div>
+//   );
+// }
+
+// export default HomePageNewsSection;
