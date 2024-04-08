@@ -17,7 +17,7 @@ const NewsBoard = () => {
   }, []);
 
   return (
-    <div className="my-2 mb-5">
+    <div className="my-2 mb-5 latest_news_section">
       <h1 className="mt-4 mb-3 text-center mb-5 mt-3 Latest_News_Heading slide-in-elliptic-bottom-bck">Latest News</h1>
       <div>
       <div className="news-card-container">

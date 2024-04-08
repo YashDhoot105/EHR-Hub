@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import Web3 from 'web3';
+import PatientRecordContract from './contracts/PatientRecordContract.json'; // Assuming you've imported the contract ABI
 import '../styles/patient_search.css';
-import '@fortawesome/fontawesome-free/css/all.css';
-import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+ import '@fortawesome/fontawesome-free/css/all.css';
+ import { useMemo } from 'react';
+ import { MaterialReactTable } from 'material-react-table';
+ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-const PatientSearch = ({ onPatientSelect }) => {
+
+const PatientSearch = () => {
   const [activeTab, setActiveTab] = useState('search');
+  const [web3, setWeb3] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [accounts, setAccounts] = useState([]);
+  const [patients, setPatients] = useState([]);
   const [newPatientData, setNewPatientData] = useState({
     name: '',
     age: '',
@@ -16,57 +23,9 @@ const PatientSearch = ({ onPatientSelect }) => {
     height: '',
     weight: '',
     doctorName: '',
-    medicalReport: null,
+    medicalReport: '',
   });
-  const [patients, setPatients] = useState(
-    JSON.parse(localStorage.getItem('patients')) || []
-  );
-  const [originalPatients, setOriginalPatients] = useState(
-    JSON.parse(localStorage.getItem('patients')) || []
-  );
-
-  useEffect(() => {
-    localStorage.setItem('patients', JSON.stringify(patients));
-  }, [patients]);
-
-  const generateRandomId = () => {
-    return Math.floor(100000 + Math.random() * 900000);
-  };
-
-  const handleCreatePatient = () => {
-    const newPatientId = generateRandomId();
-    const newPatient = { ...newPatientData, id: newPatientId.toString() };
-    setPatients([...patients, newPatient]);
-    setOriginalPatients([...originalPatients, newPatient]);
-    setNewPatientData({
-      name: '',
-      age: '',
-      gender: '',
-      bloodGroup: '',
-      height: '',
-      weight: '',
-      doctorName: '',
-      medicalReport: null,
-    });
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewPatientData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    setNewPatientData((prevData) => ({
-      ...prevData,
-      medicalReport: file,
-    }));
-  };
-
-  const columns = useMemo(
+    const columns = useMemo(
     () => [
       {
         header: 'ID',
@@ -116,13 +75,79 @@ const PatientSearch = ({ onPatientSelect }) => {
     []
   );
 
-  const table = useMemo(() => (
+
+
+      const table = useMemo(() => (
     <MaterialReactTable
       columns={columns}
       data={patients}
       initialState={{ showColumnFilters: false }}
     />
-  ), [columns, patients]);
+  ),[columns, patients]);
+
+  const [contractAddress, setContractAddress] = useState(null);
+
+useEffect(() => {
+  const initWeb3 = async () => {
+    const web3 = new Web3('http://127.0.0.1:7545'); // Connect to Ganache RPC
+    setWeb3(web3);
+
+    const accounts = await web3.eth.getAccounts();
+    setAccounts(accounts);
+
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = PatientRecordContract.networks[networkId];
+    const contract = new web3.eth.Contract(
+      PatientRecordContract.abi,
+      deployedNetwork && deployedNetwork.address
+    );
+    setContract(contract);
+    setContractAddress(deployedNetwork && deployedNetwork.address);
+  };
+
+  initWeb3();
+}, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewPatientData({ ...newPatientData, [name]: value });
+  };
+
+  const addPatient = async () => {
+    if (!contract) return;
+
+    const newPatientId = generateRandomId();
+    const newPatient = { ...newPatientData, id: newPatientId.toString() };
+    setPatients([...patients, newPatient]);
+
+    await contract.methods
+      .addPatient(
+        newPatient.name,
+        newPatient.age,
+        newPatient.gender,
+        newPatient.bloodGroup,
+        newPatient.height,
+        newPatient.weight,
+        newPatient.doctorName,
+        newPatient.medicalReport
+      )
+      .send({ from: accounts[0], gas: 5000000, gasPrice: '699157517' });
+
+    setNewPatientData({
+      name: '',
+      age: '',
+      gender: '',
+      bloodGroup: '',
+      height: '',
+      weight: '',
+      doctorName: '',
+      medicalReport: '',
+    });
+  };
+
+  const generateRandomId = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+  };
 
   return (
     <div className="container mt-4">
@@ -232,14 +257,14 @@ const PatientSearch = ({ onPatientSelect }) => {
             </div>
           </div>
           <div className="mb-3">
-            <input
+            {/* <input
               type="file"
               className="form-control"
               name="medicalReport"
               onChange={handleFileInputChange}
-            />
+            /> */}
           </div>
-          <button className="create_patient_button" onClick={handleCreatePatient}>
+          <button className="create_patient_button" onClick={addPatient}>
             Create Patient
           </button>
         </div>

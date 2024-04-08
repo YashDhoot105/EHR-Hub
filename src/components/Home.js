@@ -378,7 +378,7 @@ const Home = () => {
 
       <div className="row align-items-center justify-content-center about_us_section">
         <div className="col-md-12 text-center mt-6 mb-2">
-          <h1 className="About_Us_heading">About us</h1>
+          <h1 className="About_Us_heading" id="about_us">About us</h1>
         </div>
       </div>
 

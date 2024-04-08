@@ -221,12 +221,12 @@ const Navbar = () => {
                 Record
               </a>
             </li>
-{/* 
+
             <li className="nav-item">
-              <a className="nav-link px-4 py-3" href="/HealthInsurancePlans">
-                Insurance
+              <a className="nav-link px-4 py-3" href="#about_us">
+                About Us
               </a>
-            </li> */}
+            </li>
 
             <li className="nav-item dropdown">
               <a
